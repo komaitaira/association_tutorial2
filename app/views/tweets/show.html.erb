@@ -4,3 +4,17 @@
 <hr>
 <p><%= @tweet.body %></p>
 
+<p><%= @tweet.comments.count %>件コメント</p>
+<ol>
+  <% @tweet.comments.each do |comment| %>
+    <li><%= link_to comment.user.name, user_path(comment.user.id) %>: <%= comment.body %></li>
+    <%= comment.created_at.strftime('%Y/%m/%d') %>
+  <% end %>
+</ol>
+
+
+<%= form_for ([@tweet, @comment]) do |f| %>
+  <%= f.label :body, "コメントをここに" %>
+  <%= f.text_field :body %>
+  <%= f.submit "コメント送信" %>
+<% end %>
