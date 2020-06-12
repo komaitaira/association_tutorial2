@@ -12,4 +12,5 @@
   <% else %>
     <p><span>お気に入り数: </span><%= tweet.favorites.count %></p>
   <% end %>
+  <p><%= link_to tweet.comments.count, tweet_path(tweet.id) %>件コメント</p>
 <% end %>
