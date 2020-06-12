@@ -1,4 +1,5 @@
 class TweetsController < ApplicationController
+  before_action :authenticate_user!
   def new
   	@tweet = Tweet.new #新規投稿用の空のインスタンス
   end
@@ -16,6 +17,7 @@ class TweetsController < ApplicationController
 
   def show
   	@tweet = Tweet.find(params[:id])
+  	@user = @tweet.user
   end
 
   def edit

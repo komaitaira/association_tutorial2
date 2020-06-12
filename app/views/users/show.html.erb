@@ -1,4 +1,14 @@
 <h1>ハンター詳細</h1>
 
 <hr>
-<p><%= @user.name %></p>
+<p><%= @user.name %>: <%= @user.email %></p>
+
+<% @tweets.each do |tweet| %>
+  <hr>
+  <p><span>ツイート内容: </span><%= link_to tweet.body, tweet_path(tweet.id) %></p>
+<% end %>
+
+<% @favorite_tweets.each do |favorite_tweet| %>
+  <hr>
+  <p><span>ファボツイート内容: </span><%= link_to favorite_tweet.body, tweet_path(favorite_tweet.id) %></p>
+<% end %>
