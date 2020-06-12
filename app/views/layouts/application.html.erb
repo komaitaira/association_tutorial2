@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AssociationTutorial2</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header>
+      <% if user_signed_in? %> <!--  deviseのメソッドで「ログインしているかしていないかでtrue or falseを返す」 -->
+        <%= link_to "新規投稿", new_tweet_path %>
+        <%= link_to "マイページ", user_path(current_user.id) %>
+        <%= link_to "投稿一覧", root_path %>
+        <%= link_to "ユーザー一覧", users_path %>
+        <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+      <% else %>
+        <%= link_to "Top", top_path %>
+        <%= link_to "About", about_path %>
+        <%= link_to "新規登録", new_user_registration_path %>
+        <%= link_to "ログイン", new_user_session_path %>
+      <% end %>
+    </header>
+    <div class="body"></div>
+    <%= yield %>
+  </body>
+</html>

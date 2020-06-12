@@ -1,0 +1,7 @@
+<h1>新規投稿</h1>
+<p>念を送ってください</p>
+<%= form_for @tweet do |f| %>
+  <%= f.label :body,"念の内容" %>
+  <%= f.text_field :body %>
+  <%= f.submit "念を送る" %>
+<% end %>
