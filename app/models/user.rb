@@ -16,6 +16,9 @@ class User < ApplicationRecord
   has_many :passive_relationships, class_name: "Relationship", foreign_key: :follower_id
   has_many :followers, through: :passive_relationships, source: :following
 
+  validates :name, presence: true
+  validates :name, length: {minimum: 2} #2文字以上
+  validates :name, length: {maximum: 20} #20文字以下
   def followed_by?(user)
   	passive_relationships.find_by(following_id: user.id).present?
   end
