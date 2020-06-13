@@ -15,7 +15,7 @@ class TweetsController < ApplicationController
   end
 
   def index
-  	@tweets = Tweet.all
+  	@tweets = Tweet.all.page(params[:page]) #ページング機能追加の記述
   end
 
   def show
@@ -35,6 +35,6 @@ class TweetsController < ApplicationController
 
   private
   def tweet_params
-  	params.require(:tweet).permit(:body) #tweetモデルのカラムのみを許可
+  	params.require(:tweet).permit(:body, :image) #tweetモデルのカラムのみを許可
   end
 end
