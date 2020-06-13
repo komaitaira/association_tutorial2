@@ -1,16 +1,26 @@
-<h1>みんなの念</h1>
-
-<% @tweets.each do |tweet| %>
-  <hr>
-  <p><%= link_to tweet.user.name, user_path(tweet.user.id) %>: <%= link_to tweet.body, tweet_path(tweet.id) %></p>
-  <% if user_signed_in? %>
-    <% if tweet.favorited_by?(current_user) %>
-      <p><span>お気に入り解除: </span><%= link_to tweet.favorites.count, tweet_favorites_path(tweet.id), method: :delete %></p>
-    <% else %>
-      <p><span>お気に入り登録: </span><%= link_to tweet.favorites.count, tweet_favorites_path(tweet.id), method: :post %></p>
+<div class="container">
+    <h1>みんなの念</h1>
+    <% @tweets.each do |tweet| %>
+      <hr>
+      <%= link_to tweet_path(tweet.id) do %>
+        <%= attachment_image_tag tweet, :image %>
+      <% end %>
+      <%= attachment_image_tag tweet.user, :profile_image, size: "50x50", fallback: "no_image.jpg" %>
+      <p><%= link_to tweet.user.name, user_path(tweet.user.id) %>: <%= link_to tweet.body, tweet_path(tweet.id) %></p>
+      <% if user_signed_in? %>
+        <% if tweet.favorited_by?(current_user) %>
+          <p><span>お気に入り解除: </span><%= link_to tweet.favorites.count, tweet_favorites_path(tweet.id), method: :delete %></p>
+        <% else %>
+          <p><span>お気に入り登録: </span><%= link_to tweet.favorites.count, tweet_favorites_path(tweet.id), method: :post %></p>
+        <% end %>
+        <p><%= link_to tweet.comments.count, tweet_path(tweet.id) %>件コメント</p>
+      <% else %>
+        <p><span>お気に入り数: </span><%= tweet.favorites.count %></p>
+      <% end %>
     <% end %>
-    <p><%= link_to tweet.comments.count, tweet_path(tweet.id) %>件コメント</p>
-  <% else %>
-    <p><span>お気に入り数: </span><%= tweet.favorites.count %></p>
-  <% end %>
-<% end %>
+
+    <%= paginate @tweets %>
+
+</div>
+
+

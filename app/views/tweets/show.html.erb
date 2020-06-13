@@ -1,7 +1,9 @@
 <h1>念の詳細</h1>
-
-<p><%= @user.name %></p>
 <hr>
+<%= attachment_image_tag @tweet, :image %>
+<hr>
+<%= attachment_image_tag @user, :profile_image, size: "50x50", fallback: "no_image.jpg" %>
+<p><%= @user.name %></p>
 <p><%= @tweet.body %></p>
 
 <p><%= @tweet.comments.count %>件コメント</p>

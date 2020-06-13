@@ -3,6 +3,7 @@
 <%= form_for @tweet do |f| %>
   <%= render 'shared/error_messages' %>
 
+  <%= f.attachment_field :image %>
   <%= f.label :body,"念の内容" %>
   <%= f.text_field :body %>
   <%= f.submit "念を送る" %>

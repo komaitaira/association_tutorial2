@@ -2,6 +2,7 @@
 
 <% @users.each do |user| %>
   <hr>
+  <%= attachment_image_tag user, :profile_image, size: "50x50", fallback: "no_image.jpg" %>
   <p><%= link_to user.name, user_path(user.id) %>: <%= user.email %></p>
   <% if current_user != user %>
     <% if user.followed_by?(current_user) %>
