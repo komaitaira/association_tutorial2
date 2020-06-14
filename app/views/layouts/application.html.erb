@@ -17,6 +17,7 @@
         <%= link_to "マイページ", user_path(current_user.id) %>
         <%= link_to "投稿一覧", root_path %>
         <%= link_to "ユーザー一覧", users_path %>
+        <%= link_to "ユーザー検索", search_users_path %>
         <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
       <% else %>
         <%= link_to "Top", top_path %>
