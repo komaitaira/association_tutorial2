@@ -1,5 +1,7 @@
 class TweetsController < ApplicationController
   before_action :authenticate_user!
+  before_action :correct_user, only: [:destroy]
+
   def new
   	@tweet = Tweet.new #新規投稿用の空のインスタンス
   end
@@ -24,17 +26,21 @@ class TweetsController < ApplicationController
     @comment = Comment.new
   end
 
-  def edit
-  end
-
-  def update
-  end
-
   def destroy
+    @tweet = Tweet.find(params[:id])
+    @tweet.destroy
+    redirect_to tweets_path
   end
 
   private
   def tweet_params
   	params.require(:tweet).permit(:body, :image) #tweetモデルのカラムのみを許可
+  end
+
+  def correct_user
+    tweet = Tweet.find(params[:id])
+    if tweet.user_id != current_user.id
+      redirect_to tweets_path
+    end
   end
 end

@@ -5,6 +5,9 @@
 <%= attachment_image_tag @user, :profile_image, size: "50x50", fallback: "no_image.jpg" %>
 <p><%= @user.name %></p>
 <p><%= @tweet.body %></p>
+<% if @tweet.user_id == current_user.id %>
+  <%= link_to "コメントを削除", tweet_path(@tweet.id), method: :delete, class: "btn-sm btn-danger", "data-confirm" => "本当に消しますか？" %>
+<% end %>
 
 <p><%= @tweet.comments.count %>件コメント</p>
 <ol>
