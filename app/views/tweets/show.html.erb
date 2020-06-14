@@ -18,7 +18,7 @@
 </ol>
 
 
-<%= form_for ([@tweet, @comment]) do |f| %>
+<%= form_with model: ([@tweet, @comment]) do |f| %>
   <%= f.label :body, "コメントをここに" %>
   <%= f.text_field :body %>
   <%= f.submit "コメント送信" %>
