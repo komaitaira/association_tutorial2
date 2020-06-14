@@ -1,11 +1,9 @@
+<h1>ハンター詳細</h1>
+<hr>
+<%= attachment_image_tag @user, :profile_image, size: "50x50", fallback: "no_image.jpg" %>
+<p><%= @user.name %>: <%= @user.email %></p>
 <% if @user.id == current_user.id %>
-  <h1>ハンター詳細</h1>
-  <hr>
-  <%= attachment_image_tag @user, :profile_image, size: "50x50", fallback: "no_image.jpg" %>
-  <p><%= @user.name %>: <%= @user.email %><%= link_to "プロフィール編集", edit_user_path(@user) %></p>
-<% else %>
-  <hr>
-  <p><%= @user.name %>: <%= @user.email %>
+  <%= link_to "プロフィール編集", edit_user_path(@user) %>
 <% end %>
 
 <p><%= link_to "フォロー一覧", follows_user_path(@user.id) %></p>
