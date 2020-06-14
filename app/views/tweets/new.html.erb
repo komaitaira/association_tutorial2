@@ -1,10 +1,12 @@
-<h1>新規投稿</h1>
-<p>念を送ってください</p>
-<%= form_with model: @tweet do |f| %>
-  <%= render 'shared/error_messages' %>
+<div class="container">
+  <h1>新規投稿</h1>
+  <p>念を送ってください</p>
+  <%= form_with model: @tweet do |f| %>
+    <%= render 'shared/error_messages' %>
 
-  <%= f.attachment_field :image %>
-  <%= f.label :body,"念の内容" %>
-  <%= f.text_field :body %>
-  <%= f.submit "念を送る" %>
-<% end %>
+    <%= f.attachment_field :image %>
+    <%= f.label :body,"念の内容" %>
+    <%= f.text_field :body %>
+    <%= f.submit "念を送る" %>
+  <% end %>
+</div>

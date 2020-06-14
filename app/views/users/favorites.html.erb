@@ -1,0 +1,12 @@
+<div class="container">
+  <h1>お気に入り一覧</h1>
+  <% @favorite_tweets.each do |favorite_tweet| %>
+    <hr>
+    <p>
+      <%= link_to user_path(favorite_tweet.user) do %>
+        <%= attachment_image_tag favorite_tweet.user, :profile_image, size: "50x50", fallback: "no_image.jpg" %>
+      <% end %>
+      <%= favorite_tweet.user.name %>: <%= link_to favorite_tweet.body, tweet_path(favorite_tweet.id) %>
+    </p>
+  <% end %>
+</div>

@@ -26,7 +26,18 @@
         <%= link_to "ログイン", new_user_session_path %>
       <% end %>
     </header>
-    <div class="body"></div>
+    <div class="body">
+      <div class="container">
+        <% if flash[:notice] %>
+          <div class="flash">
+            <%= flash[:notice] %>
+          </div>
+        <% end %>
+      </div>
+    </div>
     <%= yield %>
+    <footer>
+      <div class="container"></div>
+    </footer>
   </body>
 </html>

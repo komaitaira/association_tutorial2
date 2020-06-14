@@ -17,6 +17,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     @user.update(user_params)
+    flash[:notice] = "編集が成功しました。"
     redirect_to user_path(@user.id)
   end
 
@@ -36,6 +37,11 @@ class UsersController < ApplicationController
     else
       @users = User.none
     end
+  end
+
+  def favorites
+    @user = User.find(params[:id])
+    @favorite_tweets = @user.favorite_tweets
   end
 
   private

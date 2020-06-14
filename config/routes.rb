@@ -13,4 +13,5 @@ Rails.application.routes.draw do
   	get :followers, on: :member
     get :search, on: :collection
   end
+  get '/users/favorites/:id', to: 'users#favorites', as: 'favorites_user'
 end

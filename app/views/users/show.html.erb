@@ -1,31 +1,30 @@
-<h1>ハンター詳細</h1>
-<hr>
-<%= attachment_image_tag @user, :profile_image, size: "50x50", fallback: "no_image.jpg" %>
-<p><%= @user.name %>: <%= @user.email %></p>
-<% if @user.id == current_user.id %>
-  <%= link_to "プロフィール編集", edit_user_path(@user) %>
-<% end %>
+<div class="container">
 
-<p><%= link_to "フォロー一覧", follows_user_path(@user.id) %></p>
-<p><%= link_to "フォロワー一覧", followers_user_path(@user.id) %></p>
-<% if current_user != @user %>
-  <% if @user.followed_by?(current_user) %>
-    <p><%= link_to "フォロー済み", user_relationships_path(@user.id), method: :delete %></p>
+  <h1>ハンター詳細</h1>
+  <hr>
+  <% if @user.id == current_user.id %>
+    <%= link_to edit_user_path(@user) do %>
+      <%= attachment_image_tag @user, :profile_image, size: "100x100", fallback: "no_image.jpg" %>
+    <% end %>
   <% else %>
-    <p><%= link_to "フォローする", user_relationships_path(@user.id), method: :post %></p>
+    <%= attachment_image_tag @user, :profile_image, size: "100x100", fallback: "no_image.jpg" %>
   <% end %>
-<% end %>
+  <p><%= @user.name %>: <%= @user.email %></p>
 
-
-<% @tweets.each do |tweet| %>
-  <hr>
-  <%= link_to tweet_path(tweet.id) do %>
-    <%= attachment_image_tag tweet, :image %>
+  <p><%= link_to "フォロー一覧", follows_user_path(@user.id) %> | <%= link_to "フォロワー一覧", followers_user_path(@user.id) %> | <%= link_to "お気に入り一覧", favorites_user_path(@user.id) %></p>
+  <% if current_user != @user %>
+    <% if @user.followed_by?(current_user) %>
+      <p><%= link_to "フォロー済み", user_relationships_path(@user.id), method: :delete %></p>
+    <% else %>
+      <p><%= link_to "フォローする", user_relationships_path(@user.id), method: :post %></p>
+    <% end %>
   <% end %>
-  <p><span>ツイート内容: </span><%= link_to tweet.body, tweet_path(tweet.id) %></p>
-<% end %>
 
-<% @favorite_tweets.each do |favorite_tweet| %>
-  <hr>
-  <p><span>ファボツイート内容: </span><%= link_to favorite_tweet.body, tweet_path(favorite_tweet.id) %></p>
-<% end %>
+  <% @tweets.each do |tweet| %>
+    <hr>
+    <%= link_to tweet_path(tweet.id) do %>
+      <%= attachment_image_tag tweet, :image, size: "400x400" %>
+    <% end %>
+    <p><span>ツイート内容: </span><%= link_to tweet.body, tweet_path(tweet.id) %></p>
+  <% end %>
+</div>

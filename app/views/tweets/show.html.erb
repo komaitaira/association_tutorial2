@@ -1,25 +1,27 @@
-<h1>念の詳細</h1>
-<hr>
-<%= attachment_image_tag @tweet, :image %>
-<hr>
-<%= attachment_image_tag @user, :profile_image, size: "50x50", fallback: "no_image.jpg" %>
-<p><%= @user.name %></p>
-<p><%= @tweet.body %></p>
-<% if @tweet.user_id == current_user.id %>
-  <%= link_to "コメントを削除", tweet_path(@tweet.id), method: :delete, class: "btn-sm btn-danger", "data-confirm" => "本当に消しますか？" %>
-<% end %>
-
-<p><%= @tweet.comments.count %>件コメント</p>
-<ol>
-  <% @tweet.comments.each do |comment| %>
-    <li><%= link_to comment.user.name, user_path(comment.user.id) %>: <%= comment.body %></li>
-    <%= comment.created_at.strftime('%Y/%m/%d') %>
+<div class="container">
+  <h1>念の詳細</h1>
+  <hr>
+  <%= attachment_image_tag @tweet, :image %>
+  <hr>
+  <%= attachment_image_tag @user, :profile_image, size: "50x50", fallback: "no_image.jpg" %>
+  <p><%= @user.name %></p>
+  <p><%= @tweet.body %></p>
+  <% if @tweet.user_id == current_user.id %>
+    <%= link_to "投稿を削除", tweet_path(@tweet.id), method: :delete, class: "btn-sm btn-danger", "data-confirm" => "本当に消しますか？" %>
   <% end %>
-</ol>
+
+  <p><%= @tweet.comments.count %>件コメント</p>
+  <ol>
+    <% @tweet.comments.each do |comment| %>
+      <li><%= link_to comment.user.name, user_path(comment.user.id) %>: <%= comment.body %></li>
+      <%= comment.created_at.strftime('%Y/%m/%d') %>
+    <% end %>
+  </ol>
 
 
-<%= form_with model: ([@tweet, @comment]) do |f| %>
-  <%= f.label :body, "コメントをここに" %>
-  <%= f.text_field :body %>
-  <%= f.submit "コメント送信" %>
-<% end %>
+  <%= form_with model: ([@tweet, @comment]) do |f| %>
+    <%= f.label :body, "コメントをここに" %>
+    <%= f.text_field :body %>
+    <%= f.submit "コメント送信" %>
+  <% end %>
+</div>
